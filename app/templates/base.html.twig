@@ -15,22 +15,23 @@
 <body>
 {% if is_granted('ROLE_USER') %}
     <div class="topnav">
-        <a href="{{ url('task_index') }}">{{ 'label.tasks'|trans }}</a>
+        <a href="{{ url('post_index') }}">{{ 'label.posts'|trans }}</a>
         <a href="{{ url('category_index') }}">{{ 'label.categories'|trans }}</a>
         <a href="{{ url('tag_index') }}">{{ 'label.tags'|trans }}</a>
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ url('user_index') }}">{{ 'label.users'|trans }}</a>
+            <a href="{{ url('comment_index') }}">{{ 'label.comments'|trans }}</a>
         {% endif %}
-        <a class="profile" href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
+        <a class="profile" href="{{ url('app_logout') }}">{{ 'action.logout'|trans }}</a>
         <div class="profile">{{ app.user.email }}</div>
     </div>
 {% else %}
     <div class="topnav">
-        <a href="{{ url('task_index') }}">{{ 'label.tasks'|trans }}</a>
+        <a href="{{ url('post_index') }}">{{ 'label.posts'|trans }}</a>
         <a href="{{ url('category_index') }}">{{ 'label.categories'|trans }}</a>
         <a href="{{ url('tag_index') }}">{{ 'label.tags'|trans }}</a>
-        <a class="profile" href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
-        <a class="profile" href="{{ url('user_create') }}">{{ 'action_signin'|trans }}</a>
+        <a class="profile" href="{{ url('app_login') }}">{{ 'action.login'|trans }}</a>
+        <a class="profile" href="{{ url('user_create') }}">{{ 'action.sign_in'|trans }}</a>
     </div>
 {% endif %}
 
@@ -46,7 +47,7 @@
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <div>{{ app.user.email }}</div>
     <div>
-        <a href="{{ url('app_logout') }}" class="button">{{ 'action_logout'|trans }}</a>
+        <a href="{{ url('app_logout') }}" class="button">{{ 'action.logout'|trans }}</a>
     </div>
 {% endif %}
 

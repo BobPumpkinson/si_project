@@ -1,13 +1,13 @@
 <?php
 /**
- * Task controller.
+ * Post controller.
  */
 
 namespace App\Controller;
 
-use App\Entity\Task;
-use App\Form\Type\TaskType;
-use App\Service\TaskServiceInterface;
+use App\Entity\Post;
+use App\Form\Type\PostType;
+use App\Service\PostServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,15 +17,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * Class TaskController.
+ * Class PostController.
  */
-#[Route('/task')]
-class TaskController extends AbstractController
+#[Route('/post')]
+class PostController extends AbstractController
 {
     /**
-     * Task service.
+     * Post service.
      */
-    private TaskServiceInterface $taskService;
+    private postServiceInterface $postService;
 
     /**
      * Translator.
@@ -35,12 +35,12 @@ class TaskController extends AbstractController
     /**
      * Constructor.
      *
-     * @param TaskServiceInterface $taskService Task service
+     * @param PostServiceInterface $postService Post service
      * @param TranslatorInterface  $translator  Translator
      */
-    public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator)
+    public function __construct(PostServiceInterface $postService, TranslatorInterface $translator)
     {
-        $this->taskService = $taskService;
+        $this->postService = $postService;
         $this->translator = $translator;
     }
 
@@ -51,16 +51,16 @@ class TaskController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(name: 'task_index', methods: 'GET')]
+    #[Route(name: 'post_index', methods: 'GET')]
     public function index(Request $request): Response
     {
         $filters = $this->getFilters($request);
-        $pagination = $this->taskService->getPaginatedList(
+        $pagination = $this->postService->getPaginatedList(
             $request->query->getInt('page', 1),
             $filters
         );
 
-        return $this->render('task/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('post/index.html.twig', ['pagination' => $pagination]);
     }
 
     /**
@@ -84,14 +84,14 @@ class TaskController extends AbstractController
     /**
      * Show action.
      *
-     * @param Task $task Task entity
+     * @param Post $post Post entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'task_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    public function show(Task $task): Response
+    #[Route('/{id}', name: 'post_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
+    public function show(Post $post): Response
     {
-        return $this->render('task/show.html.twig', ['task' => $task]);
+        return $this->render('post/show.html.twig', ['post' => $post]);
     }
 
     /**
@@ -101,70 +101,70 @@ class TaskController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'task_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'post_create', methods: 'GET|POST', )]
     #[IsGranted('ROLE_ADMIN')]
     public function create(Request $request): Response
     {
-        $task = new Task();
+        $post = new Post();
         $form = $this->createForm(
-            TaskType::class,
-            $task,
-            ['action' => $this->generateUrl('task_create')]
+            PostType::class,
+            $post,
+            ['action' => $this->generateUrl('post_create')]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->save($task);
+            $this->postService->save($post);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+        return $this->render('post/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Task    $task    Task entity
+     * @param Post    $post    Post entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/edit', name: 'task_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[Route('/{id}/edit', name: 'post_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     #[IsGranted('ROLE_ADMIN')]
-    public function edit(Request $request, Task $task): Response
+    public function edit(Request $request, Post $post): Response
     {
         $form = $this->createForm(
-            TaskType::class,
-            $task,
+            PostType::class,
+            $post,
             [
                 'method' => 'PUT',
-                'action' => $this->generateUrl('task_edit', ['id' => $task->getId()]),
+                'action' => $this->generateUrl('post_edit', ['id' => $post->getId()]),
             ]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->save($task);
+            $this->postService->save($post);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.edited_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('post_index');
         }
 
         return $this->render(
-            'task/edit.html.twig',
+            'post/edit.html.twig',
             [
                 'form' => $form->createView(),
-                'task' => $task,
+                'post' => $post,
             ]
         );
     }
@@ -173,40 +173,40 @@ class TaskController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Task    $task    Task entity
+     * @param Post    $post    Post entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/delete', name: 'task_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[Route('/{id}/delete', name: 'post_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     #[IsGranted('ROLE_ADMIN')]
-    public function delete(Request $request, Task $task): Response
+    public function delete(Request $request, Post $post): Response
     {
         $form = $this->createForm(
             FormType::class,
-            $task,
+            $post,
             [
                 'method' => 'DELETE',
-                'action' => $this->generateUrl('task_delete', ['id' => $task->getId()]),
+                'action' => $this->generateUrl('post_delete', ['id' => $post->getId()]),
             ]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->delete($task);
+            $this->postService->delete($post);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.deleted_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('post_index');
         }
 
         return $this->render(
-            'task/delete.html.twig',
+            'post/delete.html.twig',
             [
                 'form' => $form->createView(),
-                'task' => $task,
+                'post' => $post,
             ]
         );
     }

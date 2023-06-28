@@ -1,24 +1,24 @@
 <?php
 /**
- * Task service.
+ * Post service.
  */
 
 namespace App\Service;
 
-use App\Entity\Task;
-use App\Repository\TaskRepository;
+use App\Entity\Post;
+use App\Repository\PostRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class TaskService.
+ * Class PostService.
  */
-class TaskService implements TaskServiceInterface
+class PostService implements PostServiceInterface
 {
     /**
-     * Task repository.
+     * Post repository.
      */
-    private TaskRepository $taskRepository;
+    private PostRepository $postRepository;
 
     /**
      * Paginator.
@@ -38,18 +38,18 @@ class TaskService implements TaskServiceInterface
     /**
      * Constructor.
      *
-     * @param TaskRepository     $taskRepository Task repository
+     * @param PostRepository     $postRepository Post repository
      * @param PaginatorInterface $paginator      Paginator
      * @param CategoryServiceInterface $categoryService Category service
      * @param TagServiceInterface      $tagService      Tag service
      */
     public function __construct(
-        TaskRepository $taskRepository,
+        PostRepository $postRepository,
         PaginatorInterface $paginator,
         CategoryServiceInterface $categoryService,
         TagServiceInterface $tagService,
     ) {
-        $this->taskRepository = $taskRepository;
+        $this->postRepository = $postRepository;
         $this->paginator = $paginator;
         $this->categoryService = $categoryService;
         $this->tagService = $tagService;
@@ -68,34 +68,34 @@ class TaskService implements TaskServiceInterface
         $filters = $this->prepareFilters($filters);
 
         return $this->paginator->paginate(
-            $this->taskRepository->queryAll($filters),
+            $this->postRepository->queryAll($filters),
             $page,
-            TaskRepository::PAGINATOR_ITEMS_PER_PAGE
+            PostRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
 
     /**
      * Save entity.
      *
-     * @param Task $task Task entity
+     * @param Post $post Post entity
      */
-    public function save(Task $task): void
+    public function save(Post $post): void
     {
-        $this->taskRepository->save($task);
+        $this->postRepository->save($post);
     }
 
     /**
      * Delete entity.
      *
-     * @param Task $task Task entity
+     * @param Post $post Post entity
      */
-    public function delete(Task $task): void
+    public function delete(Post $post): void
     {
-        $this->taskRepository->delete($task);
+        $this->postRepository->delete($post);
     }
 
     /**
-     * Prepare filters for the tasks list.
+     * Prepare filters for the Posts list.
      *
      * @param array<string, int> $filters Raw filters from request
      *

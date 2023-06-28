@@ -1,19 +1,19 @@
 <?php
 /**
- * Task fixtures.
+ * Post fixtures.
  */
 
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Task;
+use App\Entity\Post;
 use App\Entity\Tag;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
- * Class TaskFixtures.
+ * Class PostFixtures.
  */
-class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
+class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -28,32 +28,32 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             return;
         }
 
-        $this->createMany(100, 'tasks', function (int $i) {
-            $task = new Task();
-            $task->setTitle($this->faker->sentence);
-            $task->setCreatedAt(
+        $this->createMany(100, 'posts', function (int $i) {
+            $post = new Post();
+            $post->setTitle($this->faker->sentence);
+            $post->setCreatedAt(
                 \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
-            $task->setUpdatedAt(
+            $post->setUpdatedAt(
                 \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
-            $task->setCategory($category);
+            $post->setCategory($category);
 
             for ($a = 0; $a < 3; ++$a) {
                 /** @var Tag $tag */
                 $tag = $this->getRandomReference('tags');
-                $task->addTag($tag);
+                $post->addTag($tag);
             }
 
-            $task->setContent($this->faker->paragraph(30));
+            $post->setContent($this->faker->paragraph(30));
 
-            return $task;
+            return $post;
         });
 
         $this->manager->flush();

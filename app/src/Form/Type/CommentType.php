@@ -1,23 +1,20 @@
 <?php
 /**
- * Task type.
+ * Comment type.
  */
 
 namespace App\Form\Type;
 
-use App\Entity\Category;
-use App\Entity\Task;
-use App\Entity\Tag;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TaskType.
+ * Class CommentType.
  */
-class TaskType extends AbstractType
+class CommentType extends AbstractType
 {
     /**
      * Builds the form.
@@ -33,50 +30,29 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
-            'title',
+            'email',
             TextType::class,
             [
-                'label' => 'label.title',
+                'label' => 'label.email',
                 'required' => true,
-                'attr' => ['max_length' => 255],
-            ]
-        );
+                'attr' => ['max_length' => 64],
+            ]);
         $builder->add(
-            'category',
-            EntityType::class,
+            'nick',
+            TextType::class,
             [
-                'class' => Category::class,
-                'choice_label' => function ($category): string {
-                    return $category->getTitle();
-                },
-                'label' => 'label.category',
-                'placeholder' => 'label.none',
+                'label' => 'label.nick',
                 'required' => true,
-            ]
-        );
-        $builder->add(
-            'tags',
-            EntityType::class,
-            [
-                'class' => Tag::class,
-                'choice_label' => function ($tag): string {
-                    return $tag->getTitle();
-                },
-                'label' => 'label.tags',
-                'placeholder' => 'label.none',
-                'required' => false,
-                'expanded' => true,
-                'multiple' => true,
-            ]
-        );
+                'attr' => ['max_length' => 64],
+            ]);
         $builder->add(
             'content',
             TextType::class,
             [
                 'label' => 'label.content',
                 'required' => true,
-            ]
-        );
+                'attr' => ['max_length' => 64],
+            ]);
     }
 
     /**
@@ -86,7 +62,7 @@ class TaskType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Task::class]);
+        $resolver->setDefaults(['data_class' => Comment::class]);
     }
 
     /**
@@ -99,6 +75,6 @@ class TaskType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'task';
+        return 'comment';
     }
 }
