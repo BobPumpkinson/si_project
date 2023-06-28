@@ -36,7 +36,8 @@ class CommentType extends AbstractType
                 'label' => 'label.email',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
+            ]
+        );
         $builder->add(
             'nick',
             TextType::class,
@@ -44,7 +45,8 @@ class CommentType extends AbstractType
                 'label' => 'label.nick',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
+            ]
+        );
         $builder->add(
             'content',
             TextType::class,
@@ -52,7 +54,8 @@ class CommentType extends AbstractType
                 'label' => 'label.content',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
+            ]
+        );
     }
 
     /**

@@ -20,8 +20,7 @@ interface CommentServiceInterface
     public function save(Comment $comment): void;
 
     /**
-     * @param Comment $comment
-     * @return void
+     * Delete entity.
      */
     public function delete(Comment $comment): void;
 

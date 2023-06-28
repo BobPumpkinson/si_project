@@ -1,4 +1,7 @@
 <?php
+/**
+ * Tag entity.
+ */
 
 namespace App\Entity;
 
@@ -104,6 +107,8 @@ class Tag
     /**
      * Setter for updated at.
      *
+     * @param \DateTimeInterface $updatedAt Updated at
+     *
      * @return $this
      */
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
@@ -114,7 +119,7 @@ class Tag
     }
 
     /**
-     * @return string|null
+     * Getter for slug.
      */
     public function getSlug(): ?string
     {
@@ -122,7 +127,7 @@ class Tag
     }
 
     /**
-     * @return $this
+     * Setter for slug.
      */
     public function setSlug(string $slug): self
     {
@@ -145,6 +150,8 @@ class Tag
      * Setter for title.
      *
      * @param string $title Title
+     *
+     * @return Tag Title
      */
     public function setTitle(string $title): self
     {

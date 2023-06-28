@@ -36,7 +36,8 @@ class PasswordType extends AbstractType
                 'label' => 'label.password',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
+            ]
+        );
     }
 
     /**

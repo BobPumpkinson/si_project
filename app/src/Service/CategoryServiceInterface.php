@@ -20,8 +20,7 @@ interface CategoryServiceInterface
     public function save(Category $category): void;
 
     /**
-     * @param Category $category
-     * @return void
+     * Delete entity.
      */
     public function delete(Category $category): void;
 

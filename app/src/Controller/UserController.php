@@ -85,7 +85,7 @@ class UserController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'user_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'user_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         $user = new User();

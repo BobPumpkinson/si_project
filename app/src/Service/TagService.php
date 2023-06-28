@@ -36,8 +36,9 @@ class TagService implements TagServiceInterface
     /**
      * Constructor.
      *
-     * @param TagRepository      $tagRepository Tag repository
-     * @param PaginatorInterface $paginator     Paginator
+     * @param TagRepository      $tagRepository  Tag repository
+     * @param PaginatorInterface $paginator      Paginator
+     * @param PostRepository     $postRepository Post repository
      */
     public function __construct(TagRepository $tagRepository, PaginatorInterface $paginator, PostRepository $postRepository)
     {
@@ -73,8 +74,7 @@ class TagService implements TagServiceInterface
     }
 
     /**
-     * @param Tag $tag
-     * @return void
+     * Delete entity.
      */
     public function delete(Tag $tag): void
     {

@@ -36,7 +36,8 @@ class NewUserType extends AbstractType
                 'label' => 'label.email',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
+            ]
+        );
         $builder->add(
             'password',
             TextType::class,
@@ -44,7 +45,8 @@ class NewUserType extends AbstractType
                 'label' => 'label.password',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
+            ]
+        );
     }
 
     /**

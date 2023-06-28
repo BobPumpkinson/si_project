@@ -31,8 +31,9 @@ class UserService implements UserServiceInterface
     /**
      * Constructor.
      *
-     * @param UserRepository     $userRepository User repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param UserRepository              $userRepository User repository
+     * @param PaginatorInterface          $paginator      Paginator
+     * @param UserPasswordHasherInterface $passwordHasher Password hasher
      */
     public function __construct(UserRepository $userRepository, PaginatorInterface $paginator, UserPasswordHasherInterface $passwordHasher)
     {
@@ -65,13 +66,13 @@ class UserService implements UserServiceInterface
     public function save(User $user): void
     {
         $this->userRepository->save($user);
-
     }
 
     /**
      * Save password.
      *
-     * @param User $user User entity
+     * @param User   $user     User entity
+     * @param string $password Password
      */
     public function savePassword(User $user, string $password): void
     {
@@ -85,8 +86,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param User $user
-     * @return void
+     * Delete entity.
      */
     public function delete(User $user): void
     {

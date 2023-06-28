@@ -56,8 +56,6 @@ class Post
 
     /**
      * Category.
-     *
-     * @var Category
      */
     #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EXTRA_LAZY')]
     #[Assert\Type(Category::class)]
@@ -221,8 +219,6 @@ class Post
 
     /**
      * Getter for content.
-     *
-     * @return string|null
      */
     public function getContent(): ?string
     {
@@ -232,7 +228,8 @@ class Post
     /**
      * Setter for content.
      *
-     * @param string $content
+     * @param string $content content
+     *
      * @return $this
      */
     public function setContent(string $content): self
@@ -244,8 +241,6 @@ class Post
 
     /**
      * Get the comments associated with this post.
-     *
-     * @return Collection
      */
     public function getComments(): Collection
     {

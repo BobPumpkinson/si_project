@@ -38,17 +38,13 @@ class PostService implements PostServiceInterface
     /**
      * Constructor.
      *
-     * @param PostRepository     $postRepository Post repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param PostRepository           $postRepository  Post repository
+     * @param PaginatorInterface       $paginator       Paginator
      * @param CategoryServiceInterface $categoryService Category service
      * @param TagServiceInterface      $tagService      Tag service
      */
-    public function __construct(
-        PostRepository $postRepository,
-        PaginatorInterface $paginator,
-        CategoryServiceInterface $categoryService,
-        TagServiceInterface $tagService,
-    ) {
+    public function __construct(PostRepository $postRepository, PaginatorInterface $paginator, CategoryServiceInterface $categoryService, TagServiceInterface $tagService)
+    {
         $this->postRepository = $postRepository;
         $this->paginator = $paginator;
         $this->categoryService = $categoryService;
@@ -58,7 +54,7 @@ class PostService implements PostServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int                $page    Page number
      * @param array<string, int> $filters Filters array
      *
      * @return PaginationInterface<string, mixed> Paginated list
@@ -120,5 +116,4 @@ class PostService implements PostServiceInterface
 
         return $resultFilters;
     }
-
 }

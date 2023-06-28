@@ -1,4 +1,7 @@
 <?php
+/**
+ * Comment entity.
+ */
 
 namespace App\Entity;
 
@@ -30,17 +33,17 @@ class Comment
      * Created at.
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
-    private ?DateTimeImmutable $updatedAt = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * Content.
@@ -72,6 +75,8 @@ class Comment
 
     /**
      * Getter for Id.
+     *
+     * @return int|null id
      */
     public function getId(): ?int
     {
@@ -81,9 +86,9 @@ class Comment
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -91,9 +96,11 @@ class Comment
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable $createdAt Created at
+     * @param \DateTimeImmutable $createdAt Created at
+     *
+     * @return Comment comment
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -103,9 +110,9 @@ class Comment
     /**
      * Getter for updated at.
      *
-     * @return DateTimeImmutable|null Updated at
+     * @return \DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -113,10 +120,9 @@ class Comment
     /**
      * Setter for updated at.
      *
-     * @param DateTimeImmutable $updatedAt Updated at
-     * @return Comment
+     * @param \DateTimeImmutable $updatedAt Updated at
      */
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -125,8 +131,6 @@ class Comment
 
     /**
      * Getter for Content.
-     *
-     * @return string|null
      */
     public function getContent(): ?string
     {
@@ -135,9 +139,6 @@ class Comment
 
     /**
      * Setter for Content.
-     *
-     * @param string $content
-     * @return Comment
      */
     public function setContent(string $content): self
     {
@@ -149,7 +150,7 @@ class Comment
     /**
      * Getter for Email.
      *
-     * @return string|null
+     * @return string|null Email
      */
     public function getEmail(): ?string
     {
@@ -159,7 +160,8 @@ class Comment
     /**
      * Setter for Email.
      *
-     * @param string $email
+     * @param string $email Email
+     *
      * @return $this
      */
     public function setEmail(string $email): self
@@ -172,7 +174,7 @@ class Comment
     /**
      * Getter for Nick.
      *
-     * @return string|null
+     * @return string|null Nick
      */
     public function getNick(): ?string
     {
@@ -182,7 +184,8 @@ class Comment
     /**
      * Setter for Nick.
      *
-     * @param string $nick
+     * @param string $nick Nick
+     *
      * @return $this
      */
     public function setNick(string $nick): self
@@ -195,7 +198,7 @@ class Comment
     /**
      * Getter for Post.
      *
-     * @return Post|null
+     * @return Post|null Post
      */
     public function getPost(): ?Post
     {
@@ -205,8 +208,7 @@ class Comment
     /**
      * Setter for Post.
      *
-     * @param Post|null $post
-     * @return void
+     * @param Post|null $post Post
      */
     public function setPost(?Post $post): void
     {

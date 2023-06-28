@@ -9,7 +9,6 @@ use App\Entity\Comment;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -36,8 +35,9 @@ class CommentService implements CommentServiceInterface
     /**
      * Constructor.
      *
-     * @param CommentRepository      $commentRepository Comment repository
-     * @param PaginatorInterface $paginator     Paginator
+     * @param CommentRepository  $commentRepository Comment repository
+     * @param PaginatorInterface $paginator         Paginator
+     * @param PostRepository     $postRepository    Post repository
      */
     public function __construct(CommentRepository $commentRepository, PaginatorInterface $paginator, PostRepository $postRepository)
     {
@@ -73,8 +73,7 @@ class CommentService implements CommentServiceInterface
     }
 
     /**
-     * @param Comment $comment
-     * @return void
+     * Delete entity.
      */
     public function delete(Comment $comment): void
     {

@@ -20,8 +20,7 @@ interface TagServiceInterface
     public function save(Tag $tag): void;
 
     /**
-     * @param Tag $tag
-     * @return void
+     * Delete entity.
      */
     public function delete(Tag $tag): void;
 

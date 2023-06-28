@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Class CommentController.
@@ -38,7 +37,7 @@ class CommentController extends AbstractController
      * Constructor.
      *
      * @param CommentServiceInterface $commentService Comment service
-     * @param TranslatorInterface $translator Translator
+     * @param TranslatorInterface     $translator     Translator
      */
     public function __construct(CommentServiceInterface $commentService, TranslatorInterface $translator)
     {
@@ -80,10 +79,11 @@ class CommentController extends AbstractController
      * Create action.
      *
      * @param Request $request HTTP request
+     * @param Post    $post    Post
      *
      * @return Response HTTP response
      */
-    #[Route('/create/{id}', name: 'comment_create', methods: 'GET|POST',)]
+    #[Route('/create/{id}', name: 'comment_create', methods: 'GET|POST')]
     #[IsGranted('ROLE_USER')]
     public function create(Request $request, Post $post): Response
     {
@@ -121,7 +121,7 @@ class CommentController extends AbstractController
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Comment     $comment     Comment entity
+     * @param Comment $comment Comment entity
      *
      * @return Response HTTP response
      */
@@ -163,7 +163,7 @@ class CommentController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Comment     $comment     Comment entity
+     * @param Comment $comment Comment entity
      *
      * @return Response HTTP response
      */
