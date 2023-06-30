@@ -7,6 +7,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -37,11 +38,12 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
                 )
             );
             $comment->setContent($this->faker->sentence);
-            $comment->setEmail(sprintf('somebody%d@example.com', $i));
-            $comment->setNick($this->faker->unique()->word);
             /** @var Post $post */
             $post = $this->getRandomReference('posts');
             $comment->setPost($post);
+            /** @var User $user */
+            $user = $this->getRandomReference('users');
+            $comment->setAuthor($user);
 
             return $comment;
         });

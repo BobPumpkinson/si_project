@@ -136,6 +136,8 @@ class Category
 
     /**
      * Getter for slug.
+     *
+     * @return string|null slug
      */
     public function getSlug(): ?string
     {

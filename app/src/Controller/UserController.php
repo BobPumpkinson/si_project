@@ -6,8 +6,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\Type\NewPasswordType;
 use App\Form\Type\UserType;
-use App\Form\Type\PasswordType;
+// use App\Form\Type\PasswordType;
 use App\Form\Type\NewUserType;
 use App\Service\UserServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -165,7 +166,7 @@ class UserController extends AbstractController
     public function editPassword(Request $request, User $user): Response
     {
         $form = $this->createForm(
-            PasswordType::class,
+            NewPasswordType::class,
             $user,
             [
                 'method' => 'PUT',

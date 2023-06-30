@@ -87,7 +87,9 @@ class CommentController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function create(Request $request, Post $post): Response
     {
+        $user = $this->getUser();
         $comment = new Comment();
+        $comment->setAuthor($user);
         $comment->setPost($post);
         $form = $this->createForm(CommentType::class, $comment);
         /*$form = $this->createForm(

@@ -50,7 +50,7 @@ class CommentRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->select('partial comment.{id, createdAt, updatedAt, content, email, nick}')
+            ->select('partial comment.{id, createdAt, updatedAt, content}')
             ->orderBy('comment.updatedAt', 'DESC');
     }
 

@@ -16,12 +16,10 @@
             <dd>{{ comment.updatedAt|format_date('long') }}</dd>
             <dt>{{ 'label.content'|trans }}</dt>
             <dd>{{  comment.content }}</dd>
-            <dt>{{ 'label.email'|trans }}</dt>
-            <dd>{{  comment.email }}</dd>
-            <dt>{{ 'label.nick'|trans }}</dt>
-            <dd>{{  comment.nick }}</dd>
             <dt>{{ 'label.post'|trans }}</dt>
             <dd>{{  comment.post.id }}</dd>
+            <dt>{{ 'label.email'|trans }}</dt>
+            <dd>{{  comment.author.email }}</dd>
         </dl>
         <p>
             <a href="{{ url('post_index') }}" title="{{ 'action.back_to_list'|trans }}" class="button">

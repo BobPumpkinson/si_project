@@ -234,6 +234,14 @@
             <source>message.tag_contains_posts</source>
             <target>Tag contains posts</target>
         </trans-unit>
+        <trans-unit id="label.password">
+            <source>label.password</source>
+            <target>Password</target>
+        </trans-unit>
+        <trans-unit id="label.author">
+            <source>label.author</source>
+            <target>Author</target>
+        </trans-unit>
     </body>
     </file>
 </xliff>

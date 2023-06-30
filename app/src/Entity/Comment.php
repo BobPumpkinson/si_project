@@ -53,25 +53,20 @@ class Comment
     private ?string $content = null;
 
     /**
-     * Email.
-     */
-    #[ORM\Column(type: 'string', length: 180)]
-    #[Assert\NotBlank]
-    #[Assert\Email]
-    private ?string $email = null;
-
-    /**
-     * Nick.
-     */
-    #[ORM\Column(length: 64)]
-    private ?string $nick = null;
-
-    /**
      * Post id.
      */
     #[ORM\ManyToOne(targetEntity: Post::class, fetch: 'EXTRA_LAZY', inversedBy: 'comments')]
     #[ORM\JoinColumn(name: 'post_id', referencedColumnName: 'id', nullable: false)]
     private $post;
+
+    /**
+     * Author.
+     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
+    #[Assert\Type(User::class)]
+    #[Assert\NotBlank]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    private User $author;
 
     /**
      * Getter for Id.
@@ -121,6 +116,8 @@ class Comment
      * Setter for updated at.
      *
      * @param \DateTimeImmutable $updatedAt Updated at
+     *
+     * @return Comment comment
      */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
@@ -131,6 +128,8 @@ class Comment
 
     /**
      * Getter for Content.
+     *
+     * @return string|null content
      */
     public function getContent(): ?string
     {
@@ -139,58 +138,14 @@ class Comment
 
     /**
      * Setter for Content.
+     *
+     * @param string $content content
+     *
+     * @return Comment comment
      */
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Getter for Email.
-     *
-     * @return string|null Email
-     */
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    /**
-     * Setter for Email.
-     *
-     * @param string $email Email
-     *
-     * @return $this
-     */
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Getter for Nick.
-     *
-     * @return string|null Nick
-     */
-    public function getNick(): ?string
-    {
-        return $this->nick;
-    }
-
-    /**
-     * Setter for Nick.
-     *
-     * @param string $nick Nick
-     *
-     * @return $this
-     */
-    public function setNick(string $nick): self
-    {
-        $this->nick = $nick;
 
         return $this;
     }
@@ -213,5 +168,29 @@ class Comment
     public function setPost(?Post $post): void
     {
         $this->post = $post;
+    }
+
+    /**
+     * Getter for Author.
+     *
+     * @return User|null Author
+     */
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    /**
+     * Setter for Author.
+     *
+     * @param User $author Author
+     *
+     * @return $this
+     */
+    public function setAuthor(User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }

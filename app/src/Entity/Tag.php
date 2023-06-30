@@ -86,6 +86,8 @@ class Tag
      * Setter for created at.
      *
      * @param \DateTimeInterface $createdAt Created at
+     *
+     * @return Tag tag
      */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
@@ -120,6 +122,8 @@ class Tag
 
     /**
      * Getter for slug.
+     *
+     * @return string|null slug
      */
     public function getSlug(): ?string
     {
@@ -128,6 +132,10 @@ class Tag
 
     /**
      * Setter for slug.
+     *
+     * @param string $slug slug
+     *
+     * @return Tag tag
      */
     public function setSlug(string $slug): self
     {

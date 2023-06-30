@@ -219,6 +219,8 @@ class Post
 
     /**
      * Getter for content.
+     *
+     * @return string|null content
      */
     public function getContent(): ?string
     {
@@ -241,6 +243,8 @@ class Post
 
     /**
      * Get the comments associated with this post.
+     *
+     * @return Collection comments
      */
     public function getComments(): Collection
     {

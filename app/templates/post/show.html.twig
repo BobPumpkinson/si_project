@@ -33,8 +33,7 @@
                     <th>{{ 'label.created_at'|trans }}</th>
                     <th>{{ 'label.updated_at'|trans }}</th>
                     <th>{{ 'label.content'|trans }}</th>
-                    <th>{{ 'label.email'|trans }}</th>
-                    <th>{{ 'label.nick'|trans }}</th>
+                    <th>{{ 'label.author'|trans }}</th>
                     <th>{{ 'label.actions'|trans }}</th>
                 </tr>
                 </thead>
@@ -45,8 +44,7 @@
                         <td>{{ comment.createdAt|format_date('long') }}</td>
                         <td>{{ comment.updatedAt|format_date('long') }}</td>
                         <td>{{ comment.content }}</td>
-                        <td>{{ comment.email }}</td>
-                        <td>{{ comment.nick }}</td>
+                        <td>{{ comment.author.email }}</td>
                         <td>
                             <a href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'action.show'|trans }}" class="button">
                                 {{ 'action.show'|trans }}
